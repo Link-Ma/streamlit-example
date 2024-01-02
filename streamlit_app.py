@@ -2,7 +2,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
-from mycomponent import mycomponent
+from mind_tree import mind_tree
 
 
 """
@@ -14,7 +14,7 @@ forums](https://discuss.streamlit.io).
 
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
-value = mycomponent(my_input_value="hello there")
+value = mind_tree()
 st.write("Received", value)
 
 num_points = st.slider("Number of points in spiral", 1, 10000, 1100)

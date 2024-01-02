@@ -1,66 +1,24 @@
 <html>
   <body>
     <!-- Set up your HTML here -->
-    <input id="myinput" value="" />
+    <div id="map"></div>
 
     <script>
-      // ----------------------------------------------------
-      // Just copy/paste these functions as-is:
+    import MindElixir from "https://cdn.jsdelivr.net/npm/mind-elixir@latest/dist/MindElixir.js";
 
-      function sendMessageToStreamlitClient(type, data) {
-        var outData = Object.assign({
-          isStreamlitMessage: true,
-          type: type,
-        }, data);
-        window.parent.postMessage(outData, "*");
-      }
-
-      function init() {
-        sendMessageToStreamlitClient("streamlit:componentReady", {apiVersion: 1});
-      }
-
-      function setFrameHeight(height) {
-        sendMessageToStreamlitClient("streamlit:setFrameHeight", {height: height});
-      }
-
-      // The `data` argument can be any JSON-serializable value.
-      function sendDataToPython(data) {
-        sendMessageToStreamlitClient("streamlit:setComponentValue", data);
-      }
-
-      // ----------------------------------------------------
-      // Now modify this part of the code to fit your needs:
-
-      var myInput = document.getElementById("myinput");
-
-      // data is any JSON-serializable value you sent from Python,
-      // and it's already deserialized for you.
-      function onDataFromPython(event) {
-        if (event.data.type !== "streamlit:render") return;
-        myInput.value = event.data.args.my_input_value;  // Access values sent from Python here!
-      }
-
-      myInput.addEventListener("change", function() {
-        sendDataToPython({
-          value: myInput.value,
-          dataType: "json",
-        });
-      })
-
-      // Hook things up!
-      window.addEventListener("message", onDataFromPython);
-      init();
-
-      // Hack to autoset the iframe height.
-      window.addEventListener("load", function() {
-        window.setTimeout(function() {
-          setFrameHeight(document.documentElement.clientHeight)
-        }, 0);
-      });
-
-      // Optionally, if the automatic height computation fails you, give this component a height manually
-      // by commenting out below:
-      //setFrameHeight(200);
+    let mind = new MindElixir({
+      el: '#map',
+      direction: MindElixir.LEFT,
+      // or set as data that is return from `.getAllData()`
+      // data: {...},
+      draggable: true, // default true
+      contextMenu: true, // default true
+      toolBar: true, // default true
+      nodeMenu: true, // default true
+      keypress: true, // default true
+    })
+    mind.init(MindElixir.new('new topic'))
+    console.log(mind)
     </script>
   </body>
 </html>
