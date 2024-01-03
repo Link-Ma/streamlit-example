@@ -6,7 +6,7 @@
     <script>
     import MindElixir from "https://cdn.jsdelivr.net/npm/mind-elixir@latest/dist/MindElixir.js";
 
-    let mind = new MindElixir({
+    let mind_tree = new MindElixir({
       el: '#map',
       direction: MindElixir.LEFT,
       // or set as data that is return from `.getAllData()`
@@ -17,8 +17,8 @@
       nodeMenu: true, // default true
       keypress: true, // default true
     })
-    mind.init(MindElixir.new('new topic'))
-    console.log(mind)
+    mind_tree.init(MindElixir.new('new topic'))
+    console.log(mind_tree)
     </script>
   </body>
 </html>
